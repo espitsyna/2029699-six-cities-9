@@ -7,8 +7,48 @@ type MainPageProps = {
 };
 
 function MainPage({ cardsCount }: MainPageProps): JSX.Element {
+  const data = [{
+    key: 1,
+    image: 'apartment-01.jpg',
+    price: 120,
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'apartment',
+    rating: 4,
+    isPremium: true,
+  }, {
+    key: 2,
+    image: 'room.jpg',
+    price: 80,
+    title: 'Wood and stone place',
+    type: 'room',
+    rating: 4,
+    isFavourite: true,
+  }, {
+    key: 3,
+    image: 'apartment-02.jpg',
+    price: 132,
+    title: 'Canal View Prinsengracht',
+    type: 'apartment',
+    rating: 4,
+  }, {
+    key: 4,
+    image: 'apartment-03.jpg',
+    price: 180,
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'apartment',
+    rating: 5,
+    isPremium: true,
+  }, {
+    key: 5,
+    image: 'room.jpg',
+    price: 80,
+    title: 'Wood and stone place',
+    type: 'room',
+    rating: 4,
+    isFavourite: true,
+  }];
   return (
-    <>
+    <main className="page__main page__main--index">
       <Menu active="Amsterdam" />
       <div className="cities">
         <div className="cities__places-container container">
@@ -32,53 +72,16 @@ function MainPage({ cardsCount }: MainPageProps): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {
-                [{
-                  key: 1,
-                  image: 'apartment-01.jpg',
-                  price: 120,
-                  title: 'Beautiful & luxurious apartment at great location',
-                  type: 'apartment',
-                  rating: 4,
-                  isPremium: true,
-                }, {
-                  key: 2,
-                  image: 'room.jpg',
-                  price: 80,
-                  title: 'Wood and stone place',
-                  type: 'room',
-                  rating: 4,
-                  isFavourite: true,
-                }, {
-                  key: 3,
-                  image: 'apartment-02.jpg',
-                  price: 132,
-                  title: 'Canal View Prinsengracht',
-                  type: 'apartment',
-                  rating: 4,
-                }, {
-                  key: 4,
-                  image: 'apartment-03.jpg',
-                  price: 180,
-                  title: 'Nice, cozy, warm big bed apartment',
-                  type: 'apartment',
-                  rating: 5,
-                  isPremium: true,
-                }, {
-                  key: 5,
-                  image: 'room.jpg',
-                  price: 80,
-                  title: 'Wood and stone place',
-                  type: 'room',
-                  rating: 4,
-                  isFavourite: true,
-                }]
+                data
                   .slice(0, cardsCount)
                   .map(({ key, type, ...params }) => (
                     <Card
                       key={key}
                       className="cities__place-card"
-                      type={type as AccommodationType}
-                      {...params}
+                      card={{
+                        type: type as AccommodationType,
+                        ...params,
+                      }}
                     />),
                   )
               }
@@ -89,7 +92,7 @@ function MainPage({ cardsCount }: MainPageProps): JSX.Element {
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 

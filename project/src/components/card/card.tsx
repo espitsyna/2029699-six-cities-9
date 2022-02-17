@@ -1,14 +1,17 @@
+import { Link } from 'react-router-dom';
 import AccommodationType from '../../types/AccomodationType';
 
 type CardProps = {
+  card: {
+    image: string,
+    price: number,
+    title: string,
+    type: AccommodationType,
+    rating: number,
+    isPremium?: boolean,
+    isFavourite?: boolean,
+  }
   className: string,
-  image: string,
-  price: number,
-  title: string,
-  type: AccommodationType,
-  rating: number,
-  isPremium?: boolean,
-  isFavourite?: boolean,
   imageSize?: { height: number, width: number },
 };
 
@@ -22,16 +25,19 @@ const renderType = (type: AccommodationType) => {
 };
 
 function Card({
+  card: {
+    image,
+    price,
+    title,
+    type,
+    rating,
+    isPremium,
+    isFavourite,
+  },
   className,
-  image,
-  price,
-  title,
-  type,
-  rating,
-  isPremium,
-  isFavourite,
   imageSize = { height: 200, width: 260 },
 }: CardProps): JSX.Element {
+  const link = '/offer/1';
   return (
     <article className={`${className} place-card`}>
       {isPremium && (
@@ -40,9 +46,9 @@ function Card({
         </div>
       )}
       <div className={`${className.split('__')[0]}__image-wrapper place-card__image-wrapper`}>
-        <a href="/#">
+        <Link to={link}>
           <img className="place-card__image" src={`img/${image}`} {...imageSize} alt="Place"/>
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -64,7 +70,7 @@ function Card({
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{title}</a>
+          <Link to={link}>{title}</Link>
         </h2>
         <p className="place-card__type">{renderType(type)}</p>
       </div>

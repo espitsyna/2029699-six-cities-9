@@ -2,7 +2,7 @@ import Menu from '../menu/menu';
 
 function MainEmptyPage(): JSX.Element {
   return (
-    <>
+    <main className="page__main page__main--index page__main--index-empty">
       <Menu active="Dusseldorf" />
       <div className="cities">
         <div className="cities__places-container cities__places-container--empty container">
@@ -15,7 +15,7 @@ function MainEmptyPage(): JSX.Element {
           <div className="cities__right-section"></div>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 

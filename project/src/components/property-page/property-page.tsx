@@ -1,9 +1,35 @@
 import Card from '../card/card';
 import AccommodationType from '../../types/AccomodationType';
 
-function PropertyPage(): JSX.Element {
+type PropertyPageProps = {
+  authStatus: boolean,
+}
+
+function PropertyPage({ authStatus }: PropertyPageProps): JSX.Element {
+  const data = [{
+    key: 1,
+    image: 'room.jpg',
+    price: 80,
+    rating: 4,
+    title: 'Wood and stone place',
+    type: 'room',
+  }, {
+    key: 2,
+    image: 'apartment-02.jpg',
+    price: 132,
+    rating: 4,
+    title: 'Canal View Prinsengracht',
+    type: 'apartment',
+  }, {
+    key: 3,
+    image: 'apartment-03.jpg',
+    price: 180,
+    rating: 5,
+    title: 'Nice, cozy, warm big bed apartment',
+    type: 'apartment',
+  }];
   return (
-    <>
+    <main className="page__main page__main--property">
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
@@ -151,56 +177,58 @@ function PropertyPage(): JSX.Element {
                   </div>
                 </li>
               </ul>
-              <form className="reviews__form form" action="#" method="post">
-                <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                <div className="reviews__rating-form form__rating">
-                  <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio"/>
-                  <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
-                  </label>
+              {authStatus && (
+                <form className="reviews__form form" action="#" method="post">
+                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
+                  <div className="reviews__rating-form form__rating">
+                    <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio"/>
+                    <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
 
-                  <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio"/>
-                  <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
-                  </label>
+                    <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio"/>
+                    <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
 
-                  <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio"/>
-                  <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
-                  </label>
+                    <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio"/>
+                    <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
 
-                  <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio"/>
-                  <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
-                  </label>
+                    <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio"/>
+                    <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
 
-                  <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio"/>
-                  <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                    <svg className="form__star-image" width="37" height="33">
-                      <use xlinkHref="#icon-star"></use>
-                    </svg>
-                  </label>
-                </div>
-                <textarea className="reviews__textarea form__textarea" id="review" name="review"
-                  placeholder="Tell how was your stay, what you like and what can be improved"
-                >
-                </textarea>
-                <div className="reviews__button-wrapper">
-                  <p className="reviews__help">
-                    To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
-                    stay with at least <b className="reviews__text-amount">50 characters</b>.
-                  </p>
-                  <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
-                </div>
-              </form>
+                    <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio"/>
+                    <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
+                  </div>
+                  <textarea className="reviews__textarea form__textarea" id="review" name="review"
+                    placeholder="Tell how was your stay, what you like and what can be improved"
+                  >
+                  </textarea>
+                  <div className="reviews__button-wrapper">
+                    <p className="reviews__help">
+                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
+                      stay with at least <b className="reviews__text-amount">50 characters</b>.
+                    </p>
+                    <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+                  </div>
+                </form>
+              )}
             </section>
           </div>
         </div>
@@ -211,41 +239,22 @@ function PropertyPage(): JSX.Element {
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
             {
-              [{
-                key: 1,
-                image: 'room.jpg',
-                price: 80,
-                rating: 4,
-                title: 'Wood and stone place',
-                type: 'room',
-              }, {
-                key: 2,
-                image: 'apartment-02.jpg',
-                price: 132,
-                rating: 4,
-                title: 'Canal View Prinsengracht',
-                type: 'apartment',
-              }, {
-                key: 3,
-                image: 'apartment-03.jpg',
-                price: 180,
-                rating: 5,
-                title: 'Nice, cozy, warm big bed apartment',
-                type: 'apartment',
-              }].map(({ key, type, ...params }) => (
+              data.map(({ key, type, ...params }) => (
                 <Card
                   key={key}
-                  type={type as AccommodationType}
-                  isFavourite
                   className="near-places__card"
-                  {...params}
+                  card={{
+                    type: type as AccommodationType,
+                    isFavourite: true,
+                    ...params,
+                  }}
                 />),
               )
             }
           </div>
         </section>
       </div>
-    </>
+    </main>
   );
 }
 
