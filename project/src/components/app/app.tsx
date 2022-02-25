@@ -6,21 +6,23 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Offer } from '../../types/offer';
 
 type AppProps = {
   cardsCount: number,
+  offers: Offer[],
 };
 
 const authStatus = false;
 
-function App({ cardsCount }: AppProps): JSX.Element {
+function App({ cardsCount, offers }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Layout authStatus={authStatus} />}>
           <Route
             index
-            element={<MainPage cardsCount={cardsCount} />}
+            element={<MainPage cardsCount={cardsCount} offers={offers} />}
           />
           <Route
             path="login"

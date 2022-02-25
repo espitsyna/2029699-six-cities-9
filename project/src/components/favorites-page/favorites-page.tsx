@@ -1,22 +1,23 @@
 import Card from '../card/card';
-import AccommodationType from '../../types/AccomodationType';
+import { Accommodation } from '../../types/offer';
 
 function FavoritesPage(): JSX.Element {
   const data = [{
-    key: 1,
-    image: 'apartment-small-03.jpg',
+    id: 1,
+    previewImage: 'apartment-small-03.jpg',
     price: 180,
     rating: 5,
     title: 'Nice, cozy, warm big bed apartment',
     type: 'apartment',
     isPremium: true,
   }, {
-    key: 2,
-    image: 'room-small.jpg',
+    id: 2,
+    previewImage: 'room-small.jpg',
     price: 80,
     rating: 4,
     title: 'Wood and stone place',
     type: 'room',
+    isPremium: false,
   }];
   return (
     <main className="page__main page__main--favorites">
@@ -34,13 +35,14 @@ function FavoritesPage(): JSX.Element {
               </div>
               <div className="favorites__places">
                 {
-                  data.map(({ key, type, ...params }) => (
+                  data.map(({ id, type, ...params }) => (
                     <Card
-                      key={key}
+                      key={id}
                       className="favorites__card"
                       imageSize={{ height: 110, width: 150 }}
                       card={{
-                        type: type as AccommodationType,
+                        id,
+                        type: type as Accommodation,
                         isFavourite: true,
                         ...params,
                       }}
@@ -61,11 +63,13 @@ function FavoritesPage(): JSX.Element {
               <div className="favorites__places">
                 <Card
                   card={{
-                    image: 'apartment-small-04.jpg',
+                    id: 4,
+                    previewImage: 'apartment-small-04.jpg',
                     price: 180,
                     rating: 5,
                     title: 'White castle',
                     isFavourite: true,
+                    isPremium: false,
                     type: 'apartment',
                   }}
                   className="favorites__card"

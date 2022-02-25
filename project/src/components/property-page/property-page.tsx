@@ -1,5 +1,5 @@
 import Card from '../card/card';
-import AccommodationType from '../../types/AccomodationType';
+import { Accommodation } from '../../types/offer';
 
 type PropertyPageProps = {
   authStatus: boolean,
@@ -7,22 +7,22 @@ type PropertyPageProps = {
 
 function PropertyPage({ authStatus }: PropertyPageProps): JSX.Element {
   const data = [{
-    key: 1,
-    image: 'room.jpg',
+    id: 1,
+    previewImage: 'room.jpg',
     price: 80,
     rating: 4,
     title: 'Wood and stone place',
     type: 'room',
   }, {
-    key: 2,
-    image: 'apartment-02.jpg',
+    id: 2,
+    previewImage: 'apartment-02.jpg',
     price: 132,
     rating: 4,
     title: 'Canal View Prinsengracht',
     type: 'apartment',
   }, {
-    key: 3,
-    image: 'apartment-03.jpg',
+    id: 3,
+    previewImage: 'apartment-03.jpg',
     price: 180,
     rating: 5,
     title: 'Nice, cozy, warm big bed apartment',
@@ -239,13 +239,15 @@ function PropertyPage({ authStatus }: PropertyPageProps): JSX.Element {
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
             {
-              data.map(({ key, type, ...params }) => (
+              data.map(({ id, type, ...params }) => (
                 <Card
-                  key={key}
+                  key={id}
                   className="near-places__card"
                   card={{
-                    type: type as AccommodationType,
+                    id,
+                    type: type as Accommodation,
                     isFavourite: true,
+                    isPremium: false,
                     ...params,
                   }}
                 />),

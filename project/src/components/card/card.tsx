@@ -1,21 +1,14 @@
 import { Link } from 'react-router-dom';
-import AccommodationType from '../../types/AccomodationType';
+import { Accommodation, Card as CardType } from '../../types/offer';
 
 type CardProps = {
-  card: {
-    image: string,
-    price: number,
-    title: string,
-    type: AccommodationType,
-    rating: number,
-    isPremium?: boolean,
-    isFavourite?: boolean,
-  }
+  card: CardType,
   className: string,
   imageSize?: { height: number, width: number },
+  onNavigate?: () => void,
 };
 
-const renderType = (type: AccommodationType) => {
+const renderType = (type: Accommodation) => {
   switch (type) {
     case 'apartment': return 'Apartment';
     case 'room': return 'Private room';
@@ -26,7 +19,8 @@ const renderType = (type: AccommodationType) => {
 
 function Card({
   card: {
-    image,
+    id,
+    previewImage,
     price,
     title,
     type,
@@ -36,10 +30,11 @@ function Card({
   },
   className,
   imageSize = { height: 200, width: 260 },
+  onNavigate = () => void(0),
 }: CardProps): JSX.Element {
-  const link = '/offer/1';
+  const link = `/offer/${id}`;
   return (
-    <article className={`${className} place-card`}>
+    <article className={`${className} place-card`} onMouseEnter={onNavigate}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -47,7 +42,7 @@ function Card({
       )}
       <div className={`${className.split('__')[0]}__image-wrapper place-card__image-wrapper`}>
         <Link to={link}>
-          <img className="place-card__image" src={`img/${image}`} {...imageSize} alt="Place"/>
+          <img className="place-card__image" src={`img/${previewImage}`} {...imageSize} alt="Place"/>
         </Link>
       </div>
       <div className="place-card__info">
