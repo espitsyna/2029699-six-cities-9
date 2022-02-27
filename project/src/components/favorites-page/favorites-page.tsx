@@ -1,84 +1,53 @@
 import Card from '../card/card';
-import { Accommodation } from '../../types/offer';
+import { Link } from 'react-router-dom';
+import { Offer } from '../../types/offer';
 
-function FavoritesPage(): JSX.Element {
-  const data = [{
-    id: 1,
-    previewImage: 'apartment-small-03.jpg',
-    price: 180,
-    rating: 5,
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'apartment',
-    isPremium: true,
-  }, {
-    id: 2,
-    previewImage: 'room-small.jpg',
-    price: 80,
-    rating: 4,
-    title: 'Wood and stone place',
-    type: 'room',
-    isPremium: false,
-  }];
+type FavoritesPageProps = {
+  offers: Offer[],
+};
+
+function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
   return (
-    <main className="page__main page__main--favorites">
+    <main className={`page__main page__main--favorites ${offers.length ? '' : 'page__main--favorites-empty'}`}>
       <div className="page__favorites-container container">
-        <section className="favorites">
-          <h1 className="favorites__title">Saved listing</h1>
-          <ul className="favorites__list">
-            <li className="favorites__locations-items">
-              <div className="favorites__locations locations locations--current">
-                <div className="locations__item">
-                  <a className="locations__item-link" href="/#">
-                    <span>Amsterdam</span>
-                  </a>
-                </div>
-              </div>
-              <div className="favorites__places">
-                {
-                  data.map(({ id, type, ...params }) => (
-                    <Card
-                      key={id}
-                      className="favorites__card"
-                      imageSize={{ height: 110, width: 150 }}
-                      card={{
-                        id,
-                        type: type as Accommodation,
-                        isFavorite: true,
-                        ...params,
-                      }}
-                    />),
-                  )
-                }
-              </div>
-            </li>
-
-            <li className="favorites__locations-items">
-              <div className="favorites__locations locations locations--current">
-                <div className="locations__item">
-                  <a className="locations__item-link" href="/#">
-                    <span>Cologne</span>
-                  </a>
-                </div>
-              </div>
-              <div className="favorites__places">
-                <Card
-                  card={{
-                    id: 4,
-                    previewImage: 'apartment-small-04.jpg',
-                    price: 180,
-                    rating: 5,
-                    title: 'White castle',
-                    isFavorite: true,
-                    isPremium: false,
-                    type: 'apartment',
-                  }}
-                  className="favorites__card"
-                  imageSize={{ height: 110, width: 150 }}
-                />
-              </div>
-            </li>
-          </ul>
-        </section>
+        {offers.length ? (
+          <section className="favorites">
+            <h1 className="favorites__title">Saved listing</h1>
+            <ul className="favorites__list">
+              {[...new Set(offers.map(({city: {name}}) => name))].map((city) => (
+                <li key={city} className="favorites__locations-items">
+                  <div className="favorites__locations locations locations--current">
+                    <div className="locations__item">
+                      <Link className="locations__item-link" to="/">
+                        <span>{city}</span>
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="favorites__places">
+                    {
+                      offers.filter(({ city: { name } }) => name === city).map(({ id, ...params }) => (
+                        <Card
+                          key={id}
+                          className="favorites__card"
+                          imageSize={{ height: 110, width: 150 }}
+                          card={{ id, ...params }}
+                        />
+                      ))
+                    }
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : (
+          <section className="favorites favorites--empty">
+            <h1 className="visually-hidden">Favorites (empty)</h1>
+            <div className="favorites__status-wrapper">
+              <b className="favorites__status">Nothing yet saved.</b>
+              <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+            </div>
+          </section>
+        )}
       </div>
     </main>
   );

@@ -93,7 +93,7 @@ export const offers: Offer[] = [
     },
     id: 3,
     images: ['apartment-03.jpg', 'studio-01.jpg'],
-    isFavorite: false,
+    isFavorite: true,
     isPremium: true,
     location: {
       latitude: 1,
@@ -128,7 +128,7 @@ export const offers: Offer[] = [
     },
     id: 4,
     images: ['apartment-01.jpg', 'room.jpg', 'apartment-01.jpg', 'apartment-02.jpg', 'room.jpg'],
-    isFavorite: false,
+    isFavorite: true,
     isPremium: false,
     location: {
       latitude: 1,

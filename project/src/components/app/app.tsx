@@ -31,7 +31,7 @@ function App({ cardsCount, offers }: AppProps): JSX.Element {
           />
           <Route
             path="favorites"
-            element={<PrivateRoute authStatus={authStatus}><FavoritesPage /></PrivateRoute>}
+            element={<PrivateRoute authStatus={authStatus}><FavoritesPage offers={offers.filter(({ isFavorite }) => isFavorite)} /></PrivateRoute>}
           />
           <Route
             path="/offer/:id"
