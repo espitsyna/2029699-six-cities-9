@@ -11,7 +11,7 @@ export const offers: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
+    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
       '\n' +
       'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: ['Wi-Fi', 'Heating', 'Washing machine', 'Cabel TV', 'Baby seat', 'Towels', 'Kitchen', 'Fridge', 'Coffee machine', 'Dishwasher'],
@@ -23,7 +23,7 @@ export const offers: Offer[] = [
     },
     id: 1,
     images: ['apartment-03.jpg', 'studio-01.jpg', 'apartment-01.jpg', 'room.jpg', 'apartment-01.jpg', 'apartment-02.jpg'],
-    isFavourite: false,
+    isFavorite: false,
     isPremium: true,
     location: {
       latitude: 1,
@@ -46,7 +46,7 @@ export const offers: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
+    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
       '\n' +
       'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: ['Wi-Fi'],
@@ -58,7 +58,7 @@ export const offers: Offer[] = [
     },
     id: 2,
     images: ['room.jpg', 'apartment-01.jpg', 'apartment-02.jpg', 'apartment-03.jpg', 'studio-01.jpg', 'apartment-01.jpg'],
-    isFavourite: true,
+    isFavorite: true,
     isPremium: false,
     location: {
       latitude: 1,
@@ -81,7 +81,7 @@ export const offers: Offer[] = [
       },
       name: 'Amsterdam',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
+    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
       '\n' +
       'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: ['Cabel TV', 'Baby seat', 'Towels', 'Kitchen', 'Wi-Fi', 'Heating', 'Washing machine'],
@@ -93,7 +93,7 @@ export const offers: Offer[] = [
     },
     id: 3,
     images: ['apartment-03.jpg', 'studio-01.jpg'],
-    isFavourite: false,
+    isFavorite: false,
     isPremium: true,
     location: {
       latitude: 1,
@@ -116,7 +116,7 @@ export const offers: Offer[] = [
       },
       name: 'Cologne',
     },
-    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
+    description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
       '\n' +
       'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
     goods: ['Baby seat', 'Towels', 'Fridge', 'Coffee machine', 'Dishwasher'],
@@ -128,7 +128,7 @@ export const offers: Offer[] = [
     },
     id: 4,
     images: ['apartment-01.jpg', 'room.jpg', 'apartment-01.jpg', 'apartment-02.jpg', 'room.jpg'],
-    isFavourite: false,
+    isFavorite: false,
     isPremium: false,
     location: {
       latitude: 1,

@@ -43,7 +43,7 @@ function FavoritesPage(): JSX.Element {
                       card={{
                         id,
                         type: type as Accommodation,
-                        isFavourite: true,
+                        isFavorite: true,
                         ...params,
                       }}
                     />),
@@ -68,7 +68,7 @@ function FavoritesPage(): JSX.Element {
                     price: 180,
                     rating: 5,
                     title: 'White castle',
-                    isFavourite: true,
+                    isFavorite: true,
                     isPremium: false,
                     type: 'apartment',
                   }}

@@ -1,20 +1,14 @@
 import { Link } from 'react-router-dom';
-import { Accommodation, Card as CardType } from '../../types/offer';
+import Rating from '../rating/rating';
+import Favorite from '../favorite/favorite';
+import Accommodation from '../accomodation/accomodation';
+import { Card as CardType } from '../../types/offer';
 
 type CardProps = {
   card: CardType,
   className: string,
   imageSize?: { height: number, width: number },
   onNavigate?: () => void,
-};
-
-const renderType = (type: Accommodation) => {
-  switch (type) {
-    case 'apartment': return 'Apartment';
-    case 'room': return 'Private room';
-    case 'house': return 'House';
-    case 'hotel': return 'Hotel';
-  }
 };
 
 function Card({
@@ -26,7 +20,7 @@ function Card({
     type,
     rating,
     isPremium,
-    isFavourite,
+    isFavorite,
   },
   className,
   imageSize = { height: 200, width: 260 },
@@ -51,23 +45,21 @@ function Card({
             <b className="place-card__price-value">{`€${price}`}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button button ${isFavourite ? 'place-card__bookmark-button--active' : ''}`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">{isFavourite ? 'In bookmarks' : 'To bookmarks'}</span>
-          </button>
+          <Favorite
+            isFavorite={isFavorite}
+            className="place-card"
+            imageSize={{ width: 18, height: 19 }}
+          />
         </div>
-        <div className="place-card__rating rating">
-          <div className="place-card__stars rating__stars">
-            <span style={{ width: `${Math.round(rating) * 20}%` }}></span>
-            <span className="visually-hidden">Rating</span>
-          </div>
-        </div>
+        <Rating
+          rating={rating}
+          className="place-card"
+          showValue={false}
+        />
         <h2 className="place-card__name">
           <Link to={link}>{title}</Link>
         </h2>
-        <p className="place-card__type">{renderType(type)}</p>
+        <p className="place-card__type"><Accommodation type={type} /></p>
       </div>
     </article>
   );

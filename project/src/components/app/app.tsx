@@ -7,6 +7,7 @@ import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Offer } from '../../types/offer';
+import { reviews } from '../../mocks/reviews';
 
 type AppProps = {
   cardsCount: number,
@@ -34,7 +35,7 @@ function App({ cardsCount, offers }: AppProps): JSX.Element {
           />
           <Route
             path="/offer/:id"
-            element={<PropertyPage authStatus={authStatus} />}
+            element={<PropertyPage authStatus={authStatus} offers={offers} reviews={reviews} />}
           />
         </Route>
         <Route

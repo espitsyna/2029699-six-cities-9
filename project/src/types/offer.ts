@@ -1,6 +1,6 @@
 export type Accommodation = 'apartment' | 'room' | 'house' | 'hotel';
 
-type Host = {
+type User = {
   avatarUrl: string,
   id: number,
   isPro: boolean,
@@ -14,8 +14,16 @@ export type Card = {
   rating: number,
   title: string,
   type: Accommodation,
-  isFavourite: boolean,
+  isFavorite: boolean,
   isPremium: boolean,
+};
+
+export type Review = {
+  comment: string,
+  date: string,
+  id: number,
+  rating: number,
+  user: User,
 };
 
 export type Offer = Card & {
@@ -30,7 +38,7 @@ export type Offer = Card & {
   },
   description: string,
   goods: string[],
-  host: Host,
+  host: User,
   images: string[],
   location: {
     latitude: number,
