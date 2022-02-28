@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type MenuProps = {
   active: string;
 };
@@ -12,9 +14,9 @@ function Menu({ active }: MenuProps): JSX.Element {
             {
               ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'].map((city) => (
                 <li key={city} className="locations__item">
-                  <a className={`locations__item-link tabs__item ${active === city ? 'tabs__item--active' : ''}`} href="/#">
+                  <Link className={`locations__item-link tabs__item ${active === city ? 'tabs__item--active' : ''}`} to="/">
                     <span>{city}</span>
-                  </a>
+                  </Link>
                 </li>
               ))
             }
