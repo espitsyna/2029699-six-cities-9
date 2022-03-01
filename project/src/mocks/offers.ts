@@ -5,9 +5,9 @@ export const offers: Offer[] = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 1,
-        longitude: 1,
-        zoom: 1,
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
       },
       name: 'Amsterdam',
     },
@@ -26,9 +26,9 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: true,
     location: {
-      latitude: 1,
-      longitude: 1,
-      zoom: 1,
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
     },
     maxAdults: 4,
     previewImage: 'apartment-01.jpg',
@@ -40,9 +40,9 @@ export const offers: Offer[] = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 1,
-        longitude: 1,
-        zoom: 1,
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
       },
       name: 'Amsterdam',
     },
@@ -61,9 +61,9 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 1,
-      longitude: 1,
-      zoom: 1,
+      latitude: 52.369553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
     },
     maxAdults: 2,
     previewImage: 'room.jpg',
@@ -75,9 +75,9 @@ export const offers: Offer[] = [
     bedrooms: 2,
     city: {
       location: {
-        latitude: 1,
-        longitude: 1,
-        zoom: 1,
+        latitude: 4.85309666406198,
+        longitude: 4.85309666406198,
+        zoom: 10,
       },
       name: 'Amsterdam',
     },
@@ -96,9 +96,9 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 1,
-      longitude: 1,
-      zoom: 1,
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 10,
     },
     maxAdults: 5,
     previewImage: 'apartment-03.jpg',
@@ -110,11 +110,11 @@ export const offers: Offer[] = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 1,
-        longitude: 1,
+        latitude: 4.85309666406198,
+        longitude: 4.85309666406198,
         zoom: 1,
       },
-      name: 'Cologne',
+      name: 'Amsterdam',
     },
     description: 'A quiet cozy and picturesque that hides behind a river by the unique lightness of Amsterdam. The building is green and from 18th century.\n' +
       '\n' +
@@ -131,9 +131,9 @@ export const offers: Offer[] = [
     isFavorite: true,
     isPremium: false,
     location: {
-      latitude: 1,
-      longitude: 1,
-      zoom: 1,
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 10,
     },
     maxAdults: 3,
     previewImage: 'apartment-02.jpg',

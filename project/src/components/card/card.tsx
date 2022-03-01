@@ -8,7 +8,7 @@ type CardProps = {
   card: CardType,
   className: string,
   imageSize?: { height: number, width: number },
-  onNavigate?: () => void,
+  onNavigate?: (id: number) => void,
 };
 
 function Card({
@@ -28,7 +28,7 @@ function Card({
 }: CardProps): JSX.Element {
   const link = `/offer/${id}`;
   return (
-    <article className={`${className} place-card`} onMouseEnter={onNavigate}>
+    <article className={`${className} place-card`} onMouseEnter={() => onNavigate(id)} onMouseLeave={() => onNavigate(0)}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
