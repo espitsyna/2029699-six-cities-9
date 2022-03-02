@@ -26,24 +26,24 @@ export type Review = {
   user: User,
 };
 
+type Location = {
+  latitude: number,
+  longitude: number,
+  zoom: number,
+};
+
+export type City = {
+  location: Location,
+  name: string,
+};
+
 export type Offer = Card & {
   bedrooms: number,
-  city: {
-    location: {
-      latitude: number,
-      longitude: number,
-      zoom: number,
-    },
-    name: string
-  },
+  city: City,
   description: string,
   goods: string[],
   host: User,
   images: string[],
-  location: {
-    latitude: number,
-    longitude: number,
-    zoom: number,
-  },
+  location: Location,
   maxAdults: number,
 };

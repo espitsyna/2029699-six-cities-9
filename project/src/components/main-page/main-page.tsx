@@ -1,5 +1,6 @@
 import Menu from '../menu/menu';
 import CardsList from './cards-list';
+import Map from './map';
 import { Offer } from '../../types/offer';
 import { useState } from 'react';
 
@@ -9,7 +10,7 @@ type MainPageProps = {
 };
 
 function MainPage({ cardsCount, offers }: MainPageProps): JSX.Element {
-  const [, setActiveOffer] = useState(0);
+  const [activeOffer, setActiveOffer] = useState(0);
   return (
     <main className={`page__main page__main--index ${offers.length ? '' : 'page__main--index-empty'}`}>
       <Menu active="Amsterdam" />
@@ -21,7 +22,14 @@ function MainPage({ cardsCount, offers }: MainPageProps): JSX.Element {
             onNavigate={setActiveOffer}
           />
           <div className="cities__right-section">
-            {offers.length && (<section className="cities__map map"></section>)}
+            {offers.length && (
+              <section className="cities__map map">
+                <Map
+                  offers={offers}
+                  activeOffer={activeOffer}
+                />
+              </section>
+            )}
           </div>
         </div>
       </div>

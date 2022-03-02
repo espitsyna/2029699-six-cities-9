@@ -36,7 +36,7 @@ function CardsList ({ offers, cardsCount, onNavigate }: CardsListProps): JSX.Ele
                 key={id}
                 className="cities__place-card"
                 card={{ id, ...params }}
-                onNavigate={() => onNavigate(id)}
+                onNavigate={onNavigate}
               />),
             )
         }
