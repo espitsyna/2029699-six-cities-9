@@ -31,11 +31,11 @@ function CardsList ({ offers, cardsCount, onNavigate }: CardsListProps): JSX.Ele
         {
           offers
             .slice(0, cardsCount)
-            .map(({ id, ...params }) => (
+            .map((offer) => (
               <Card
-                key={id}
+                key={offer.id}
                 className="cities__place-card"
-                card={{ id, ...params }}
+                card={offer}
                 onNavigate={onNavigate}
               />),
             )
