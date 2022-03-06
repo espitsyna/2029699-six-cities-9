@@ -25,12 +25,12 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
                   </div>
                   <div className="favorites__places">
                     {
-                      offers.filter(({ city: { name } }) => name === city).map(({ id, ...params }) => (
+                      offers.filter(({ city: { name } }) => name === city).map((offer) => (
                         <Card
-                          key={id}
+                          key={offer.id}
                           className="favorites__card"
                           imageSize={{ height: 110, width: 150 }}
-                          card={{ id, ...params }}
+                          card={offer}
                         />
                       ))
                     }

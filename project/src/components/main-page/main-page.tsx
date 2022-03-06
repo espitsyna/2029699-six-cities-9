@@ -1,6 +1,6 @@
 import Menu from '../menu/menu';
 import CardsList from './cards-list';
-import Map from './map';
+import Map from '../map/map';
 import { Offer } from '../../types/offer';
 import { useState } from 'react';
 
@@ -8,6 +8,8 @@ type MainPageProps = {
   cardsCount: number,
   offers: Offer[],
 };
+
+const mapHeight = 800;
 
 function MainPage({ cardsCount, offers }: MainPageProps): JSX.Element {
   const [activeOffer, setActiveOffer] = useState(0);
@@ -27,6 +29,7 @@ function MainPage({ cardsCount, offers }: MainPageProps): JSX.Element {
                 <Map
                   offers={offers}
                   activeOffer={activeOffer}
+                  height={mapHeight}
                 />
               </section>
             )}

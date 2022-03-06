@@ -7,6 +7,7 @@ import 'leaflet/dist/leaflet.css';
 type MapProps = {
   offers: Offer[];
   activeOffer: number;
+  height: number;
 };
 
 const icon = new Icon({
@@ -21,7 +22,7 @@ const currentIcon = new Icon({
   iconAnchor: [20, 40],
 });
 
-function Map({ offers, activeOffer }: MapProps): JSX.Element {
+function Map({ offers, activeOffer, height }: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers[0].city);
 
@@ -36,7 +37,7 @@ function Map({ offers, activeOffer }: MapProps): JSX.Element {
     }
   }, [map, offers, activeOffer]);
 
-  return (<div style={{ height: '800px' }} ref={mapRef}></div>);
+  return (<div style={{ height: `${height}px` }} ref={mapRef}></div>);
 }
 
 export default Map;
