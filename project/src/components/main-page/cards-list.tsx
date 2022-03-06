@@ -1,17 +1,19 @@
 import { Offer } from '../../types/offer';
 import Card from '../card/card';
+import { City } from '../../const';
 
 type CardsListProps = {
+  selectedCity: City,
   offers: Offer[],
   cardsCount: number,
   onNavigate: (id: number) => void,
 };
 
-function CardsList ({ offers, cardsCount, onNavigate }: CardsListProps): JSX.Element {
+function CardsList ({ selectedCity, offers, cardsCount, onNavigate }: CardsListProps): JSX.Element {
   return offers.length ? (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
-      <b className="places__found">{`${offers.length} places to stay in Amsterdam`}</b>
+      <b className="places__found">{`${offers.length} places to stay in ${selectedCity}`}</b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex={0}>
