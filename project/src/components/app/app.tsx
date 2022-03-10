@@ -10,7 +10,6 @@ import { Offer } from '../../types/offer';
 import { reviews } from '../../mocks/reviews';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { CARDS_COUNT } from '../../const';
 
 const authStatus = false;
 
@@ -29,7 +28,7 @@ function App(): JSX.Element {
         <Route path='/' element={<Layout authStatus={authStatus} />}>
           <Route
             index
-            element={<MainPage selectedCity={selectedCity} cardsCount={CARDS_COUNT} offers={availableOffers} />}
+            element={<MainPage selectedCity={selectedCity} offers={availableOffers} />}
           />
           <Route
             path="login"

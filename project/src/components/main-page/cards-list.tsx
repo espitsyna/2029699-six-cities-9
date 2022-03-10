@@ -1,38 +1,48 @@
 import { Offer } from '../../types/offer';
 import Card from '../card/card';
-import { City } from '../../const';
+import { City, Sorting, CARDS_COUNT } from '../../const';
+import { useState } from 'react';
+import SortingMenu from './sorting-menu';
 
 type CardsListProps = {
   selectedCity: City,
   offers: Offer[],
-  cardsCount: number,
   onNavigate: (id: number) => void,
 };
 
-function CardsList ({ selectedCity, offers, cardsCount, onNavigate }: CardsListProps): JSX.Element {
+const sortList = (
+  { rating: rating1, price: price1 }: Offer,
+  { rating: rating2, price: price2 }: Offer,
+  sorting: Sorting,
+) => {
+  switch (sorting) {
+    case Sorting.asc:
+      return price1 <= price2 ? -1 : 1;
+    case Sorting.desc:
+      return price1 >= price2 ? -1 : 1;
+    case Sorting.rated:
+      return rating1 >= rating2 ? -1 : 1;
+
+    default: return -1;
+  }
+};
+
+function CardsList ({ selectedCity, offers, onNavigate }: CardsListProps): JSX.Element {
+  const [selectedSorting, setSelectedSorting] = useState(Sorting.popular);
+
   return offers.length ? (
     <section className="cities__places places">
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">{`${offers.length} places to stay in ${selectedCity}`}</b>
-      <form className="places__sorting" action="#" method="get">
-        <span className="places__sorting-caption">Sort by</span>
-        <span className="places__sorting-type" tabIndex={0}>
-          Popular
-          <svg className="places__sorting-arrow" width="7" height="4">
-            <use xlinkHref="#icon-arrow-select"></use>
-          </svg>
-        </span>
-        <ul className="places__options places__options--custom places__options--opened">
-          <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-          <li className="places__option" tabIndex={0}>Price: low to high</li>
-          <li className="places__option" tabIndex={0}>Price: high to low</li>
-          <li className="places__option" tabIndex={0}>Top rated first</li>
-        </ul>
-      </form>
+      <SortingMenu
+        selectedSorting={selectedSorting}
+        onSelect={setSelectedSorting}
+      />
       <div className="cities__places-list places__list tabs__content">
         {
           offers
-            .slice(0, cardsCount)
+            .sort((offer1, offer2) => sortList(offer1, offer2, selectedSorting))
+            .slice(0, CARDS_COUNT)
             .map((offer) => (
               <Card
                 key={offer.id}
