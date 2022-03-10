@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
+import { City } from '../../const';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { selectCity } from '../../store/action';
 
 type MenuProps = {
-  active: string;
+  selectedCity: City;
 };
 
-function Menu({ active }: MenuProps): JSX.Element {
+function Menu({ selectedCity }: MenuProps): JSX.Element {
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <h1 className="visually-hidden">Cities</h1>
@@ -12,9 +17,13 @@ function Menu({ active }: MenuProps): JSX.Element {
         <section className="locations container">
           <ul className="locations__list tabs__list">
             {
-              ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'].map((city) => (
+              Object.values(City).map((city) => (
                 <li key={city} className="locations__item">
-                  <Link className={`locations__item-link tabs__item ${active === city ? 'tabs__item--active' : ''}`} to="/">
+                  <Link
+                    to="/"
+                    className={`locations__item-link tabs__item ${selectedCity === city ? 'tabs__item--active' : ''}`}
+                    onClick={() => dispatch(selectCity({ city }))}
+                  >
                     <span>{city}</span>
                   </Link>
                 </li>
