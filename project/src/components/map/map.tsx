@@ -11,13 +11,13 @@ type MapProps = {
 };
 
 const icon = new Icon({
-  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
+  iconUrl: '/img/pin.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 const currentIcon = new Icon({
-  iconUrl: 'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg',
+  iconUrl: '/img/pin-active.svg',
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });

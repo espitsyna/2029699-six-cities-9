@@ -7,13 +7,12 @@ import { City } from '../../const';
 
 type MainPageProps = {
   selectedCity: City,
-  cardsCount: number,
   offers: Offer[],
 };
 
 const mapHeight = 800;
 
-function MainPage({ selectedCity, cardsCount, offers }: MainPageProps): JSX.Element {
+function MainPage({ selectedCity, offers }: MainPageProps): JSX.Element {
   const [activeOffer, setActiveOffer] = useState(0);
 
   return (
@@ -24,7 +23,6 @@ function MainPage({ selectedCity, cardsCount, offers }: MainPageProps): JSX.Elem
           <CardsList
             selectedCity={selectedCity}
             offers={offers}
-            cardsCount={cardsCount}
             onNavigate={setActiveOffer}
           />
           <div className="cities__right-section">
