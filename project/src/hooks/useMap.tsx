@@ -6,9 +6,10 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
   const [map, setMap] = useState<Map | null>(null);
 
   useEffect(() => {
-    if (mapRef.current !== null && map === null) {
+    if (mapRef.current !== null) {
+      const container = mapRef.current;
       const { location: { latitude, longitude, zoom } } = city;
-      const instance = new Map(mapRef.current, {
+      const instance = new Map(container, {
         center: { lat: latitude, lng: longitude },
         zoom,
       });
@@ -16,8 +17,16 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
       const layer = new TileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png');
       instance.addLayer(layer);
       setMap(instance);
+
+      return () => {
+        if (container) {
+          // eslint-disable-next-line camelcase,@typescript-eslint/no-explicit-any
+          (container as any)._leaflet_id = null;
+        }
+      };
     }
-  }, [mapRef, map, city]);
+  }, [mapRef, city]);
+
 
   return map;
 }

@@ -38,7 +38,7 @@ function PropertyPage({ authStatus, offers, reviews }: PropertyPageProps): JSX.E
             <div className="property__gallery">
               {images.slice(0, 6).map((image) => (
                 <div key={image} className="property__image-wrapper">
-                  <img className="property__image" src={`img/${image}`} alt="Studio"/>
+                  <img className="property__image" src={image} alt="Studio"/>
                 </div>
               ))}
             </div>
@@ -85,7 +85,7 @@ function PropertyPage({ authStatus, offers, reviews }: PropertyPageProps): JSX.E
               <h2 className="property__host-title">Meet the host</h2>
               <div className="property__host-user user">
                 <div className={`property__avatar-wrapper user__avatar-wrapper ${isPro ? 'property__avatar-wrapper--pro' : ''}`}>
-                  <img className="property__avatar user__avatar" src={`img/${hostAvatarUrl}`} width="74" height="74" alt="Host avatar"/>
+                  <img className="property__avatar user__avatar" src={hostAvatarUrl} width="74" height="74" alt="Host avatar"/>
                 </div>
                 <span className="property__user-name">{hostName}</span>
                 {isPro && (<span className="property__user-status">Pro</span>)}

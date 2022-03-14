@@ -15,3 +15,11 @@ export enum Sorting {
 }
 
 export const CARDS_COUNT = 5;
+
+export enum ApiRoute {
+  offers = 'hotels',
+  favorite = 'favorite',
+  comments = 'comments',
+  login = 'login',
+  logout = 'logout',
+}
