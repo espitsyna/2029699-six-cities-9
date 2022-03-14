@@ -15,12 +15,20 @@ const authStatus = false;
 
 function App(): JSX.Element {
   const [availableOffers, setAvailableOffers] = useState([] as Offer[]);
+  const [loading, setLoading] = useState(true);
   const selectedCity = useAppSelector(({ city }) => city);
+  const loadingData = useAppSelector(({ loading: isLoading }) => isLoading);
   const allOffers = useAppSelector(({ offers }) => offers);
 
   useEffect(() => {
     setAvailableOffers(allOffers.filter(({ city: { name } }) => name === selectedCity));
   }, [selectedCity, allOffers]);
+
+  useEffect(() => {
+    if (!loadingData) {
+      setLoading(false);
+    }
+  }, [availableOffers, loadingData]);
 
   return (
     <BrowserRouter>
@@ -28,7 +36,7 @@ function App(): JSX.Element {
         <Route path='/' element={<Layout authStatus={authStatus} />}>
           <Route
             index
-            element={<MainPage selectedCity={selectedCity} offers={availableOffers} />}
+            element={<MainPage selectedCity={selectedCity} offers={availableOffers} loading={loading} />}
           />
           <Route
             path="login"

@@ -36,7 +36,7 @@ function Card({
       )}
       <div className={`${className.split('__')[0]}__image-wrapper place-card__image-wrapper`}>
         <Link to={link}>
-          <img className="place-card__image" src={`img/${previewImage}`} {...imageSize} alt="Place"/>
+          <img className="place-card__image" src={previewImage} {...imageSize} alt="Place"/>
         </Link>
       </div>
       <div className="place-card__info">
