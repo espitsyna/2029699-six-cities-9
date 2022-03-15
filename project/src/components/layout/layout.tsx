@@ -1,12 +1,24 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { logoutAction } from '../../store/api-action';
 
 type LayoutProps = {
   authStatus: boolean,
 }
 
+const getClassName = (pathname: string) => {
+  switch (pathname) {
+    case '/': return 'page--gray page--main';
+    case '/login': return 'page--gray page--login';
+    default: return '';
+  }
+};
+
 function Layout ({ authStatus }: LayoutProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   return (
-    <div className="page">
+    <div className={`page ${getClassName(pathname)}`}>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -17,7 +29,7 @@ function Layout ({ authStatus }: LayoutProps): JSX.Element {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {authStatus ? (
+                {authStatus && (
                   <>
                     <li className="header__nav-item user">
                       <Link className="header__nav-link header__nav-link--profile" to="/favorites">
@@ -27,12 +39,13 @@ function Layout ({ authStatus }: LayoutProps): JSX.Element {
                       </Link>
                     </li>
                     <li className="header__nav-item">
-                      <a className="header__nav-link" href="/#">
+                      <Link className="header__nav-link" onClick={() => dispatch(logoutAction())} to="/">
                         <span className="header__signout">Sign out</span>
-                      </a>
+                      </Link>
                     </li>
                   </>
-                ) : (
+                )}
+                {!authStatus && '/login' !== pathname && (
                   <li className="header__nav-item user">
                     <Link className="header__nav-link header__nav-link--profile" to="/login">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
@@ -47,11 +60,6 @@ function Layout ({ authStatus }: LayoutProps): JSX.Element {
         </div>
       </header>
       <Outlet />
-      <footer className="footer container">
-        <Link className="footer__logo-link" to="/">
-          <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33"/>
-        </Link>
-      </footer>
     </div>
   );
 }
