@@ -11,14 +11,13 @@ import { reviews } from '../../mocks/reviews';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 
-const authStatus = false;
-
 function App(): JSX.Element {
   const [availableOffers, setAvailableOffers] = useState([] as Offer[]);
   const [loading, setLoading] = useState(true);
   const selectedCity = useAppSelector(({ city }) => city);
   const loadingData = useAppSelector(({ loading: isLoading }) => isLoading);
   const allOffers = useAppSelector(({ offers }) => offers);
+  const authStatus = useAppSelector(({ authStatus: auth }) => auth);
 
   useEffect(() => {
     setAvailableOffers(allOffers.filter(({ city: { name } }) => name === selectedCity));
