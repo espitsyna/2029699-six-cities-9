@@ -7,7 +7,6 @@ import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Offer } from '../../types/offer';
-import { reviews } from '../../mocks/reviews';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 
@@ -47,7 +46,7 @@ function App(): JSX.Element {
           />
           <Route
             path="/offer/:id"
-            element={<PropertyPage authStatus={authStatus} offers={availableOffers} reviews={reviews} />}
+            element={<PropertyPage authStatus={authStatus} />}
           />
         </Route>
         <Route

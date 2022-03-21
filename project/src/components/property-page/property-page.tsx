@@ -4,34 +4,74 @@ import Accommodation from '../accomodation/accomodation';
 import Favorite from '../favorite/favorite';
 import Reviews from './reviews';
 import Map from '../map/map';
-import { useParams, Navigate } from 'react-router-dom';
-import { Offer, Review } from '../../types/offer';
+import { useParams, useNavigate } from 'react-router-dom';
+import { NewReview, Offer, Review } from '../../types/offer';
+import { useEffect, useRef, useState } from 'react';
+import Loader from '../loader/loader';
+import { api } from '../../services/api';
+import { ApiRoute } from '../../const';
+import { handleError } from '../../services/error';
 
 type PropertyPageProps = {
   authStatus: boolean,
-  offers: Offer[],
-  reviews: Review[],
 }
 
 const mapHeight = 600;
 
-function PropertyPage({ authStatus, offers, reviews }: PropertyPageProps): JSX.Element {
-  const { id: param = '' } = useParams();
-  const propertyId = +param;
-  const property = offers.find((offer) => offer.id === propertyId);
-  if (!property) {
-    return (<Navigate to="/" />);
+function PropertyPage({ authStatus}: PropertyPageProps): JSX.Element {
+  const { id = '' } = useParams();
+  const navigate = useNavigate();
+  const apiInstance = api();
+  const mainRef = useRef<HTMLInputElement>(null);
+
+  const [offer, setOffer] = useState(null as Offer|null);
+  const [offersNearby, setOffersNearby] = useState([] as Offer[]);
+  const [reviews, setReviews] = useState([] as Review[]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = await apiInstance.get(`${ApiRoute.offers}/${id}`);
+        setOffer(data);
+      } catch (e) {
+        handleError(e);
+        navigate('/');
+        return;
+      }
+
+      apiInstance.get(`${ApiRoute.offers}/${id}/nearby`)
+        .then(({ data }) => setOffersNearby((data ?? []).slice(0, 3)));
+
+      apiInstance.get(`${ApiRoute.comments}/${id}`)
+        .then(({ data }) => setReviews(data ?? []));
+
+      mainRef.current?.scrollIntoView();
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  if (!offer) {
+    return (
+      <Loader />
+    );
   }
+
+  const handleSubmitReview = async (review: NewReview)  => {
+    try {
+      const { data } = await apiInstance.post(`${ApiRoute.comments}/${id}`, review);
+      setReviews(data);
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   const {
     images, title, type, rating, bedrooms, isPremium, isFavorite, maxAdults, price, goods, description,
     host: { avatarUrl: hostAvatarUrl, name: hostName, isPro },
-  } = property;
-
-  const offersNearby = offers.filter((offer) => offer.id !== propertyId).slice(0, 3);
+  } = offer;
 
   return (
-    <main className="page__main page__main--property">
+    <main className="page__main page__main--property" ref={mainRef}>
       <section className="property">
         {images.length && (
           <div className="property__gallery-container container">
@@ -98,33 +138,36 @@ function PropertyPage({ authStatus, offers, reviews }: PropertyPageProps): JSX.E
               authStatus={authStatus}
               reviews={reviews.sort(({ date: date1 }, {date: date2}) => new Date(date1) < new Date(date2) ? 1 : -1).slice(0, 10)}
               count={reviews.length}
+              onReviewSubmit={handleSubmitReview}
             />
           </div>
         </div>
         <section className="property__map map" style={{ paddingRight: '50px', paddingLeft: '50px' }}>
           <Map
-            offers={[property, ...offersNearby]}
-            activeOffer={propertyId}
+            offers={[offer, ...offersNearby]}
+            activeOffer={+id}
             height={mapHeight}
           />
         </section>
       </section>
-      <div className="container">
-        <section className="near-places places">
-          <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-            {
-              offersNearby.map((offer) => (
-                <Card
-                  key={offer.id}
-                  className="near-places__card"
-                  card={offer}
-                />),
-              )
-            }
-          </div>
-        </section>
-      </div>
+      {offersNearby.length && (
+        <div className="container">
+          <section className="near-places places">
+            <h2 className="near-places__title">Other places in the neighbourhood</h2>
+            <div className="near-places__list places__list">
+              {
+                offersNearby.map((offerNearby) => (
+                  <Card
+                    key={offerNearby.id}
+                    className="near-places__card"
+                    card={offerNearby}
+                  />),
+                )
+              }
+            </div>
+          </section>
+        </div>
+      )}
     </main>
   );
 }

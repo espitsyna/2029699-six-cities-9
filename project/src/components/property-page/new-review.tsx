@@ -1,16 +1,24 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
+import { NewReview as NewReviewType } from '../../types/offer';
 
-function NewReview(): JSX.Element {
+type NewReviewProps = {
+  onReviewSubmit: (review: NewReviewType) => void,
+};
+
+function NewReview({ onReviewSubmit }: NewReviewProps): JSX.Element {
   const [isDisabled, setDisabled] = useState(true);
   const [rating, setRating] = useState(0);
-  const [review, setReview] = useState('');
+  const [comment, setComment] = useState('');
 
   useEffect(() => {
-    setDisabled(!rating || review.length < 50 || review.length > 300);
-  }, [rating, review]);
+    setDisabled(!rating || comment.length < 50 || comment.length > 300);
+  }, [rating, comment]);
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
+    await onReviewSubmit({ comment, rating });
+    setRating(0);
+    setComment('');
   };
 
   return (
@@ -18,7 +26,9 @@ function NewReview(): JSX.Element {
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {[5, 4, 3, 2, 1].map((option) => (
-          <>
+          <div
+            key={option}
+          >
             <input
               className="form__rating-input visually-hidden"
               name="rating"
@@ -33,7 +43,7 @@ function NewReview(): JSX.Element {
                 <use xlinkHref="#icon-star"></use>
               </svg>
             </label>
-          </>
+          </div>
         ))}
       </div>
       <textarea
@@ -41,8 +51,8 @@ function NewReview(): JSX.Element {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={review}
-        onChange={(e) => setReview(e.target.value)}
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
       >
       </textarea>
       <div className="reviews__button-wrapper">
