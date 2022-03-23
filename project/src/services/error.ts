@@ -6,5 +6,5 @@ export const handleError = (error: unknown): void => {
     throw error;
   }
 
-  toast.error(error.response?.data?.error ?? 'Unknown error');
+  toast.error(error.response?.data?.error ?? error.response?.statusText ?? 'Unknown error');
 };

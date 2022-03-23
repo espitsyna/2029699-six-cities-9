@@ -18,11 +18,14 @@ export type Card = {
   isPremium: boolean,
 };
 
-export type Review = {
+export type NewReview = {
   comment: string,
+  rating: number,
+};
+
+export type Review = NewReview & {
   date: string,
   id: number,
-  rating: number,
   user: User,
 };
 

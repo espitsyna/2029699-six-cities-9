@@ -8,8 +8,13 @@ import { dropToken, saveToken } from '../services/token';
 import { handleError } from '../services/error';
 
 export const fetchOffersAction = createAsyncThunk('data/fetchOffers', async (_, thunkAPI) => {
-  const { data } = await (thunkAPI.extra as AxiosInstance).get(ApiRoute.offers);
-  store.dispatch(loadOffers({ offers: data }));
+  try {
+    const { data } = await (thunkAPI.extra as AxiosInstance).get(ApiRoute.offers);
+    store.dispatch(loadOffers({ offers: data }));
+  } catch (error) {
+    store.dispatch(loadOffers({ offers: [] }));
+    handleError(error);
+  }
 });
 
 export const checkAuthAction = createAsyncThunk('user/checkAuth', async (_, thunkAPI) => {

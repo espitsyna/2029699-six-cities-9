@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { Icon, Marker } from 'leaflet';
+import { Icon, Marker, TileLayer } from 'leaflet';
 import useMap from '../../hooks/useMap';
 import { Offer } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
@@ -28,6 +28,8 @@ function Map({ offers, activeOffer, height }: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map) {
+      map.eachLayer((layer) => !(layer instanceof TileLayer) && map.removeLayer(layer));
+
       offers.forEach(({ id, location: { latitude, longitude } }) => {
         const marker = new Marker({ lat: latitude, lng: longitude });
         marker
