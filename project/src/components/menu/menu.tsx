@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { City } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { selectCity } from '../../store/action';
+import { memo } from 'react';
 
 type MenuProps = {
   selectedCity: City;
@@ -36,4 +37,4 @@ function Menu({ selectedCity }: MenuProps): JSX.Element {
   );
 }
 
-export default Menu;
+export default memo(Menu);

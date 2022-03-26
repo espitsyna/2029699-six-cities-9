@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Sorting } from '../../const';
 
 type SortingMenuProps = {
@@ -39,4 +39,4 @@ function SortingMenu({ selectedSorting, onSelect }: SortingMenuProps): JSX.Eleme
   );
 }
 
-export default SortingMenu;
+export default memo(SortingMenu);

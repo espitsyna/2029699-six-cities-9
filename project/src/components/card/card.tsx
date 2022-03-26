@@ -3,6 +3,7 @@ import Rating from '../rating/rating';
 import Favorite from '../favorite/favorite';
 import Accommodation from '../accomodation/accomodation';
 import { Card as CardType } from '../../types/offer';
+import { memo } from 'react';
 
 type CardProps = {
   card: CardType,
@@ -65,4 +66,4 @@ function Card({
   );
 }
 
-export default Card;
+export default memo(Card);
