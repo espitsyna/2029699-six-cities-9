@@ -1,6 +1,6 @@
 import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { selectCity } from '../../store/action';
+import { selectCity } from '../../store/data/data';
 import { City } from '../../const';
 import LoginForm from './login-form';
 

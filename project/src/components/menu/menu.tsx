@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { City } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { selectCity } from '../../store/action';
+import { selectCity } from '../../store/data/data';
 import { memo } from 'react';
 
 type MenuProps = {

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { loadOffers, setAuth } from './action';
+import { loadOffers } from './data/data';
+import { setAuth } from './user/user';
 import { store } from './index';
 import { AxiosError, AxiosInstance } from 'axios';
 import { ApiRoute } from '../const';

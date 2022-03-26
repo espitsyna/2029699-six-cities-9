@@ -13,10 +13,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 function App(): JSX.Element {
   const [availableOffers, setAvailableOffers] = useState([] as Offer[]);
   const [loading, setLoading] = useState(true);
-  const selectedCity = useAppSelector(({ city }) => city);
-  const loadingData = useAppSelector(({ loading: isLoading }) => isLoading);
-  const allOffers = useAppSelector(({ offers }) => offers);
-  const authStatus = useAppSelector(({ authStatus: auth }) => auth);
+  const { data: { city: selectedCity, loading: loadingData, offers: allOffers }, user: { authStatus }} = useAppSelector((data) => data);
 
   useEffect(() => {
     setAvailableOffers(allOffers.filter(({ city: { name } }) => name === selectedCity));
