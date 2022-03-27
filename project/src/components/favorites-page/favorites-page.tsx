@@ -1,12 +1,31 @@
 import Card from '../card/card';
 import { Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
+import { useEffect, useState } from 'react';
+import { ApiRoute } from '../../const';
+import { api } from '../../services/api';
+import Loader from '../loader/loader';
 
-type FavoritesPageProps = {
-  offers: Offer[],
-};
+function FavoritesPage(): JSX.Element {
+  const [offers, setOffers] = useState([] as Offer[]);
+  const [loading, setLoading] = useState(true);
+  const apiInstance = api();
 
-function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
+  const loadFavorites = async () => {
+    const { data } = await apiInstance.get(ApiRoute.favorite);
+    setOffers(data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadFavorites();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) {
+    return (<Loader />);
+  }
+
   return (
     <>
       <main className={`page__main page__main--favorites ${offers.length ? '' : 'page__main--favorites-empty'}`}>
@@ -32,6 +51,7 @@ function FavoritesPage({ offers }: FavoritesPageProps): JSX.Element {
                             className="favorites__card"
                             imageSize={{ height: 110, width: 150 }}
                             card={offer}
+                            onFavorite={loadFavorites}
                           />
                         ))
                       }

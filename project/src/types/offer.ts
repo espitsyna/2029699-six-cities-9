@@ -1,4 +1,9 @@
-export type Accommodation = 'apartment' | 'room' | 'house' | 'hotel';
+export enum Accommodation {
+  apartment = 'apartment',
+  room = 'room',
+  house = 'house',
+  hotel = 'hotel',
+}
 
 type User = {
   avatarUrl: string,
