@@ -2,9 +2,10 @@ import Review from './review';
 import NewReview from './new-review';
 import { Review as ReviewType, NewReview as NewReviewType } from '../../types/offer';
 import { useRef } from 'react';
+import { AuthStatus } from '../../types/auth';
 
 type ReviewsProps = {
-  authStatus: boolean,
+  authStatus: AuthStatus,
   reviews: ReviewType[],
   count: number,
   onReviewSubmit: (review: NewReviewType) => void,
@@ -24,7 +25,7 @@ function Reviews({ authStatus, reviews, count, onReviewSubmit }: ReviewsProps): 
       <ul className="reviews__list">
         {reviews.map((review) => (<Review key={review.id} {...review} />))}
       </ul>
-      {authStatus && (
+      {authStatus === AuthStatus.auth && (
         <NewReview
           onReviewSubmit={handleReviewSubmit}
         />

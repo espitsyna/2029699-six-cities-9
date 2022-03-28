@@ -10,6 +10,7 @@ type CardProps = {
   className: string,
   imageSize?: { height: number, width: number },
   onNavigate?: (id: number) => void,
+  onFavorite?: () => void,
 };
 
 function Card({
@@ -26,6 +27,7 @@ function Card({
   className,
   imageSize = { height: 200, width: 260 },
   onNavigate = () => void(0),
+  onFavorite,
 }: CardProps): JSX.Element {
   const link = `/offer/${id}`;
   return (
@@ -47,9 +49,11 @@ function Card({
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <Favorite
+            offerId={id}
             isFavorite={isFavorite}
             className="place-card"
             imageSize={{ width: 18, height: 19 }}
+            onFavorite={onFavorite}
           />
         </div>
         <Rating

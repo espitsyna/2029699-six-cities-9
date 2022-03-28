@@ -4,8 +4,8 @@ import { setAuth } from './user/user';
 import { store } from './index';
 import { AxiosError, AxiosInstance } from 'axios';
 import { ApiRoute } from '../const';
-import { AuthData } from '../types/auth';
-import { dropToken, saveToken } from '../services/token';
+import { AuthData, AuthStatus } from '../types/auth';
+import { dropToken, saveToken, dropEmail, saveEmail } from '../services/storage';
 import { handleError } from '../services/error';
 
 export const fetchOffersAction = createAsyncThunk('data/fetchOffers', async (_, thunkAPI) => {
@@ -21,9 +21,9 @@ export const fetchOffersAction = createAsyncThunk('data/fetchOffers', async (_, 
 export const checkAuthAction = createAsyncThunk('user/checkAuth', async (_, thunkAPI) => {
   try {
     await (thunkAPI.extra as AxiosInstance).get(ApiRoute.login);
-    store.dispatch(setAuth({ auth: true }));
+    store.dispatch(setAuth({ auth: AuthStatus.auth }));
   } catch (error) {
-    store.dispatch(setAuth({ auth: false }));
+    store.dispatch(setAuth({ auth: AuthStatus.noAuth }));
     if ((error as AxiosError).response?.status === 401) {
       return;
     }
@@ -33,11 +33,12 @@ export const checkAuthAction = createAsyncThunk('user/checkAuth', async (_, thun
 
 export const loginAction = createAsyncThunk('user/loginAction', async (data: AuthData, thunkAPI) => {
   try {
-    const { data: { token } } = await (thunkAPI.extra as AxiosInstance).post(ApiRoute.login, data);
+    const { data: { token, email } } = await (thunkAPI.extra as AxiosInstance).post(ApiRoute.login, data);
     saveToken(token);
-    store.dispatch(setAuth({ auth: true }));
+    saveEmail(email);
+    store.dispatch(setAuth({ auth: AuthStatus.auth }));
   } catch (error) {
-    store.dispatch(setAuth({ auth: false }));
+    store.dispatch(setAuth({ auth: AuthStatus.noAuth }));
     handleError(error);
   }
 });
@@ -46,7 +47,8 @@ export const logoutAction = createAsyncThunk('user/logoutAction', async (_, thun
   try {
     await (thunkAPI.extra as AxiosInstance).delete(ApiRoute.logout);
     dropToken();
-    store.dispatch(setAuth({ auth: false }));
+    dropEmail();
+    store.dispatch(setAuth({ auth: AuthStatus.noAuth }));
   } catch (error) {
     handleError(error);
   }

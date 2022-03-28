@@ -11,9 +11,10 @@ import Loader from '../loader/loader';
 import { api } from '../../services/api';
 import { ApiRoute } from '../../const';
 import { handleError } from '../../services/error';
+import { AuthStatus } from '../../types/auth';
 
 type PropertyPageProps = {
-  authStatus: boolean,
+  authStatus: AuthStatus,
 }
 
 const mapHeight = 600;
@@ -94,6 +95,7 @@ function PropertyPage({ authStatus}: PropertyPageProps): JSX.Element {
             <div className="property__name-wrapper">
               <h1 className="property__name">{title}</h1>
               <Favorite
+                offerId={+id}
                 isFavorite={isFavorite}
                 className="property"
                 imageSize={{ width: 31, height: 33 }}

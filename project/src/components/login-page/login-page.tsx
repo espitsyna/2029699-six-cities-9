@@ -3,15 +3,16 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { selectCity } from '../../store/data/data';
 import { City } from '../../const';
 import LoginForm from './login-form';
+import { AuthStatus } from '../../types/auth';
 
 type LoginPageProps = {
-  authStatus: boolean,
+  authStatus: AuthStatus,
 }
 
 function LoginPage({ authStatus }: LoginPageProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  if (authStatus) {
+  if (authStatus === AuthStatus.auth) {
     return (<Navigate to="/" />);
   }
 

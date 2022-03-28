@@ -3,19 +3,26 @@ import CardsList from './cards-list';
 import Map from '../map/map';
 import Loader from '../loader/loader';
 import { Offer } from '../../types/offer';
-import { useState } from 'react';
-import { City } from '../../const';
-
-type MainPageProps = {
-  selectedCity: City,
-  offers: Offer[],
-  loading: boolean,
-};
+import { useEffect, useState } from 'react';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const mapHeight = 1000;
 
-function MainPage({ selectedCity, offers, loading }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState(0);
+  const [offers, setOffers] = useState([] as Offer[]);
+  const [loading, setLoading] = useState(true);
+  const { city: selectedCity, loading: loadingData, offers: allOffers } = useAppSelector(({ data }) => data);
+
+  useEffect(() => {
+    setOffers(allOffers.filter(({ city: { name } }) => name === selectedCity));
+  }, [selectedCity, allOffers]);
+
+  useEffect(() => {
+    if (!loadingData) {
+      setLoading(false);
+    }
+  }, [offers, loadingData]);
 
   return (
     <main className={`page__main page__main--index ${offers.length ? '' : 'page__main--index-empty'}`}>

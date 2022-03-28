@@ -1,9 +1,11 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { logoutAction } from '../../store/api-action';
+import { getEmail } from '../../services/storage';
+import { AuthStatus } from '../../types/auth';
 
 type LayoutProps = {
-  authStatus: boolean,
+  authStatus: AuthStatus,
 }
 
 const getClassName = (pathname: string) => {
@@ -29,13 +31,13 @@ function Layout ({ authStatus }: LayoutProps): JSX.Element {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                {authStatus && (
+                {authStatus === AuthStatus.auth && (
                   <>
                     <li className="header__nav-item user">
                       <Link className="header__nav-link header__nav-link--profile" to="/favorites">
                         <div className="header__avatar-wrapper user__avatar-wrapper">
                         </div>
-                        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                        <span className="header__user-name user__name">{getEmail()}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">
@@ -45,7 +47,7 @@ function Layout ({ authStatus }: LayoutProps): JSX.Element {
                     </li>
                   </>
                 )}
-                {!authStatus && '/login' !== pathname && (
+                {authStatus !== AuthStatus.auth && '/login' !== pathname && (
                   <li className="header__nav-item user">
                     <Link className="header__nav-link header__nav-link--profile" to="/login">
                       <div className="header__avatar-wrapper user__avatar-wrapper">
