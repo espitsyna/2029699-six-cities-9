@@ -70,3 +70,8 @@ export const offers = [
     maxAdults: 3,
   },
 ];
+
+export const authData = {
+  email: 'email@test.com',
+  password: 'pass123',
+};
