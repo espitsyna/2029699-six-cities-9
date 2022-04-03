@@ -1,5 +1,5 @@
 import { useState, memo } from 'react';
-import { Sorting } from '../../const';
+import { Sorting } from '../../../../const';
 
 type SortingMenuProps = {
   selectedSorting: Sorting,

@@ -8,7 +8,7 @@ function Rating({ rating, className, showValue }: RatingProps): JSX.Element {
   return (
     <div className={`${className}__rating rating`}>
       <div className={`${className}__stars rating__stars`}>
-        <span style={{ width: `${Math.round(rating) * 20}%` }}></span>
+        <span style={{ width: `${Math.round(rating) * 20}%` }} data-testid="rating"></span>
         <span className="visually-hidden">Rating</span>
       </div>
       {showValue && (

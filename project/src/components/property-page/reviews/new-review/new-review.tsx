@@ -1,5 +1,5 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
-import { NewReview as NewReviewType } from '../../types/offer';
+import { NewReview as NewReviewType } from '../../../../types/offer';
 
 type NewReviewProps = {
   onReviewSubmit: (review: NewReviewType) => void,

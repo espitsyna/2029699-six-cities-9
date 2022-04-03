@@ -2,7 +2,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { selectCity } from '../../store/data/data';
 import { City } from '../../const';
-import LoginForm from './login-form';
+import LoginForm from './login-form/login-form';
 import { AuthStatus } from '../../types/auth';
 
 type LoginPageProps = {

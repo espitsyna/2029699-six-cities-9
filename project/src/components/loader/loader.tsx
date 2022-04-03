@@ -43,7 +43,7 @@ function Loader(): JSX.Element {
       <style>
         {css}
       </style>
-      <div className="lds-ring">
+      <div className="lds-ring" data-testid="loader">
         <div></div>
         <div></div>
         <div></div>

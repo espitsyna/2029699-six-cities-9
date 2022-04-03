@@ -5,14 +5,16 @@ import PropertyPage from '../property-page/property-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import HistoryRouter from '../history-route/history-route';
+import { browserHistory } from '../../browser-history';
 
 function App(): JSX.Element {
   const { authStatus } = useAppSelector(({ user }) => user);
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path='/' element={<Layout authStatus={authStatus} />}>
           <Route
@@ -37,7 +39,7 @@ function App(): JSX.Element {
           element={<NotFoundPage />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

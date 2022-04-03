@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState, memo } from 'react';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { loginAction } from '../../store/api-action';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { loginAction } from '../../../store/api-action';
 import { toast } from 'react-toastify';
 
 function LoginForm(): JSX.Element {

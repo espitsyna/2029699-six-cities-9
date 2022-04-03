@@ -1,5 +1,5 @@
 import Menu from '../menu/menu';
-import CardsList from './cards-list';
+import CardsList from './cards-list/cards-list';
 import Map from '../map/map';
 import Loader from '../loader/loader';
 import { Offer } from '../../types/offer';

@@ -75,3 +75,16 @@ export const authData = {
   email: 'email@test.com',
   password: 'pass123',
 };
+
+export const review = {
+  comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+  date: 'Mon Apr 04 2022 00:36:42 GMT+0200 (Central European Summer Time)',
+  id: 1,
+  rating: 4,
+  user: {
+    avatarUrl: 'img/1.png',
+    id: 1,
+    isPro: false,
+    name: 'name',
+  },
+};
