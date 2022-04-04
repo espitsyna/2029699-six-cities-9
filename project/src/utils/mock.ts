@@ -88,3 +88,8 @@ export const review = {
     name: 'name',
   },
 };
+
+export const updateFavoriteData = {
+  id: 1,
+  isFavorite: true,
+};

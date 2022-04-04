@@ -12,12 +12,14 @@ import { api } from '../../services/api';
 import { ApiRoute } from '../../const';
 import { handleError } from '../../services/error';
 import { AuthStatus } from '../../types/auth';
+import NotFoundPage from '../not-found-page/not-found-page';
+import { AxiosError } from 'axios';
 
 type PropertyPageProps = {
   authStatus: AuthStatus,
 }
 
-const mapHeight = 600;
+const MAP_HEIGHT = 600;
 
 function PropertyPage({ authStatus}: PropertyPageProps): JSX.Element {
   const { id = '' } = useParams();
@@ -25,6 +27,7 @@ function PropertyPage({ authStatus}: PropertyPageProps): JSX.Element {
   const apiInstance = api();
   const mainRef = useRef<HTMLInputElement>(null);
 
+  const [loading, setLoading] = useState(true);
   const [offer, setOffer] = useState(null as Offer|null);
   const [offersNearby, setOffersNearby] = useState([] as Offer[]);
   const [reviews, setReviews] = useState([] as Review[]);
@@ -35,9 +38,13 @@ function PropertyPage({ authStatus}: PropertyPageProps): JSX.Element {
         const { data } = await apiInstance.get(`${ApiRoute.offers}/${id}`);
         setOffer(data);
       } catch (e) {
-        handleError(e);
-        navigate('/');
+        if ((e as AxiosError)?.response?.status !== 404) {
+          handleError(e);
+          navigate('/');
+        }
         return;
+      } finally {
+        setLoading(false);
       }
 
       apiInstance.get(`${ApiRoute.offers}/${id}/nearby`)
@@ -51,19 +58,21 @@ function PropertyPage({ authStatus}: PropertyPageProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  if (!offer) {
+  if (loading) {
     return (
       <Loader />
     );
   }
 
+  if (!offer) {
+    return (
+      <NotFoundPage />
+    );
+  }
+
   const handleSubmitReview = async (review: NewReview)  => {
-    try {
-      const { data } = await apiInstance.post(`${ApiRoute.comments}/${id}`, review);
-      setReviews(data);
-    } catch (error) {
-      handleError(error);
-    }
+    const { data } = await apiInstance.post(`${ApiRoute.comments}/${id}`, review);
+    setReviews(data);
   };
 
   const {
@@ -148,7 +157,7 @@ function PropertyPage({ authStatus}: PropertyPageProps): JSX.Element {
           <Map
             offers={[offer, ...offersNearby]}
             activeOffer={+id}
-            height={mapHeight}
+            height={MAP_HEIGHT}
           />
         </section>
       </section>

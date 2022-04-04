@@ -4,11 +4,13 @@ type RatingProps = {
   showValue: boolean,
 };
 
+const RATING_PERCENTAGE = 20;
+
 function Rating({ rating, className, showValue }: RatingProps): JSX.Element {
   return (
     <div className={`${className}__rating rating`}>
       <div className={`${className}__stars rating__stars`}>
-        <span style={{ width: `${Math.round(rating) * 20}%` }} data-testid="rating"></span>
+        <span style={{ width: `${Math.round(rating) * RATING_PERCENTAGE}%` }} data-testid="rating"></span>
         <span className="visually-hidden">Rating</span>
       </div>
       {showValue && (
