@@ -6,7 +6,7 @@ import { Offer } from '../../types/offer';
 import { useEffect, useState } from 'react';
 import { useAppSelector } from '../../hooks/useAppSelector';
 
-const mapHeight = 1000;
+const MAP_HEIGHT = 1000;
 
 function MainPage(): JSX.Element {
   const [activeOffer, setActiveOffer] = useState(0);
@@ -44,7 +44,7 @@ function MainPage(): JSX.Element {
                     <Map
                       offers={offers}
                       activeOffer={activeOffer}
-                      height={mapHeight}
+                      height={MAP_HEIGHT}
                     />
                   </section>
                 ) : null}

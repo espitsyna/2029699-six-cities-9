@@ -55,3 +55,8 @@ export type Offer = Card & {
   location: Location,
   maxAdults: number,
 };
+
+export type UpdateFavoriteData = {
+  id: number,
+  isFavorite: boolean,
+};

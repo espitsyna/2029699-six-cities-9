@@ -14,8 +14,6 @@ export enum Sorting {
   rated = 'Top rated first'
 }
 
-export const CARDS_COUNT = 5;
-
 export enum ApiRoute {
   offers = 'hotels',
   favorite = 'favorite',

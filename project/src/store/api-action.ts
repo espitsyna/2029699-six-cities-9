@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { loadOffers } from './data/data';
+import { loadOffers, setFavorite } from './data/data';
 import { setAuth } from './user/user';
 import { AxiosError, AxiosInstance } from 'axios';
 import { ApiRoute } from '../const';
 import { AuthData, AuthStatus } from '../types/auth';
 import { dropToken, saveToken, dropEmail, saveEmail } from '../services/storage';
 import { handleError } from '../services/error';
+import { UpdateFavoriteData } from '../types/offer';
 
 export const fetchOffersAction = createAsyncThunk('data/fetchOffers', async (_, { dispatch, extra }) => {
   try {
@@ -13,6 +14,15 @@ export const fetchOffersAction = createAsyncThunk('data/fetchOffers', async (_, 
     dispatch(loadOffers({ offers: data }));
   } catch (error) {
     dispatch(loadOffers({ offers: [] }));
+    handleError(error);
+  }
+});
+
+export const updateFavoriteAction = createAsyncThunk('data/updateFavorite', async ({ id, isFavorite }: UpdateFavoriteData, { dispatch, extra }) => {
+  try {
+    await (extra as AxiosInstance).post(`${ApiRoute.favorite}/${id}/${isFavorite ? 1 : 0}`);
+    dispatch(setFavorite({ id, isFavorite }));
+  } catch (error) {
     handleError(error);
   }
 });

@@ -8,6 +8,6 @@ describe('Component: Accommodation', () => {
       <Accommodation type={AccommodationType.room} />,
     );
 
-    expect(screen.getByText('Private room')).toBeInTheDocument();
+    expect(screen.getByText('private room')).toBeInTheDocument();
   });
 });

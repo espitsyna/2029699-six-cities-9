@@ -1,6 +1,6 @@
 import { Offer } from '../../../types/offer';
 import Card from '../../card/card';
-import { City, Sorting, CARDS_COUNT } from '../../../const';
+import { City, Sorting } from '../../../const';
 import { useState } from 'react';
 import SortingMenu from './sorting-menu/sorting-menu';
 
@@ -40,9 +40,8 @@ function CardsList ({ selectedCity, offers, onNavigate }: CardsListProps): JSX.E
       />
       <div className="cities__places-list places__list tabs__content">
         {
-          offers
+          [...offers]
             .sort((offer1, offer2) => sortList(offer1, offer2, selectedSorting))
-            .slice(0, CARDS_COUNT)
             .map((offer) => (
               <Card
                 key={offer.id}

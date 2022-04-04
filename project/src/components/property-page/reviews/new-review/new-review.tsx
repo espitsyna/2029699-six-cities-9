@@ -1,9 +1,13 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import { NewReview as NewReviewType } from '../../../../types/offer';
+import { handleError } from '../../../../services/error';
 
 type NewReviewProps = {
   onReviewSubmit: (review: NewReviewType) => void,
 };
+
+const MIN_LENGTH = 50;
+const MAX_LENGTH = 300;
 
 function NewReview({ onReviewSubmit }: NewReviewProps): JSX.Element {
   const [isDisabled, setDisabled] = useState(true);
@@ -11,14 +15,18 @@ function NewReview({ onReviewSubmit }: NewReviewProps): JSX.Element {
   const [comment, setComment] = useState('');
 
   useEffect(() => {
-    setDisabled(!rating || comment.length < 50 || comment.length > 300);
+    setDisabled(!rating || comment.length < MIN_LENGTH || comment.length > MAX_LENGTH);
   }, [rating, comment]);
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    await onReviewSubmit({ comment, rating });
-    setRating(0);
-    setComment('');
+    try {
+      await onReviewSubmit({ comment, rating });
+      setRating(0);
+      setComment('');
+    } catch (error) {
+      handleError(error);
+    }
   };
 
   return (
@@ -58,7 +66,7 @@ function NewReview({ onReviewSubmit }: NewReviewProps): JSX.Element {
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your
-          stay with at least <b className="reviews__text-amount">50 characters</b>.
+          stay with at least <b className="reviews__text-amouuseMapnt">{MIN_LENGTH} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={isDisabled}>Submit</button>
       </div>

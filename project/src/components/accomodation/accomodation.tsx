@@ -6,7 +6,7 @@ type AccommodationProps = {
 
 function Accommodation({ type }: AccommodationProps): JSX.Element {
   return (
-    <span>{AccommodationType.room === type ? 'Private room' : `${type[0].toUpperCase()}${type.slice(1)}`}</span>
+    <span style={{ textTransform: 'capitalize' }}>{AccommodationType.room === type ? 'private room' : type}</span>
   );
 }
 

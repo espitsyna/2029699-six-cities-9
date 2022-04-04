@@ -19,7 +19,13 @@ export const data = createSlice({
       state.offers = offers;
       state.loading = false;
     },
+    setFavorite: (state, { payload: { id, isFavorite } }) => {
+      const index = state.offers.findIndex((offer) => offer.id ===id);
+      if (-1 !== index) {
+        state.offers[index].isFavorite = isFavorite;
+      }
+    },
   },
 });
 
-export const { selectCity, loadOffers } = data.actions;
+export const { selectCity, loadOffers, setFavorite } = data.actions;

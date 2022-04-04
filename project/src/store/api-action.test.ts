@@ -3,12 +3,12 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { api } from '../services/api';
-import { fetchOffersAction, checkAuthAction, loginAction, logoutAction } from './api-action';
-import { loadOffers } from './data/data';
+import { fetchOffersAction, checkAuthAction, loginAction, logoutAction, updateFavoriteAction } from './api-action';
+import { loadOffers, setFavorite } from './data/data';
 import { setAuth } from './user/user';
 import { State } from '../types/state';
 import { ApiRoute } from '../const';
-import { offers, authData } from '../utils/mock';
+import { offers, authData, updateFavoriteData } from '../utils/mock';
 
 describe('Async actions', () => {
   const apiInstance = api();
@@ -29,6 +29,17 @@ describe('Async actions', () => {
     expect(store.getActions()).toEqual([]);
     await store.dispatch(fetchOffersAction());
     expect( store.getActions().find(({ type }) => type === loadOffers.toString())).toBeDefined();
+  });
+
+  it('should dispatch setFavorite when POST /favorite', async () => {
+    const store = mockStore();
+    mockAPI
+      .onPost(`${ApiRoute.favorite}/${updateFavoriteData.id}/${updateFavoriteData.isFavorite ? 1 : 0}`)
+      .reply(200);
+
+    expect(store.getActions()).toEqual([]);
+    await store.dispatch(updateFavoriteAction(updateFavoriteData));
+    expect( store.getActions().find(({ type }) => type === setFavorite.toString())).toBeDefined();
   });
 
   it('should dispatch setAuth when GET /login', async () => {
