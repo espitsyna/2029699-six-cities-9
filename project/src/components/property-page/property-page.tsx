@@ -2,7 +2,7 @@ import Card from '../card/card';
 import Rating from '../rating/rating';
 import Accommodation from '../accomodation/accomodation';
 import Favorite from '../favorite/favorite';
-import Reviews from './reviews';
+import Reviews from './reviews/reviews';
 import Map from '../map/map';
 import { useParams, useNavigate } from 'react-router-dom';
 import { NewReview, Offer, Review } from '../../types/offer';

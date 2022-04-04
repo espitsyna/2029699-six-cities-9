@@ -1,8 +1,8 @@
-import Review from './review';
-import NewReview from './new-review';
-import { Review as ReviewType, NewReview as NewReviewType } from '../../types/offer';
+import Review from './review/review';
+import NewReview from './new-review/new-review';
+import { Review as ReviewType, NewReview as NewReviewType } from '../../../types/offer';
 import { useRef } from 'react';
-import { AuthStatus } from '../../types/auth';
+import { AuthStatus } from '../../../types/auth';
 
 type ReviewsProps = {
   authStatus: AuthStatus,

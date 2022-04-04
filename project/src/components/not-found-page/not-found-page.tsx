@@ -1,6 +1,6 @@
 function NotFoundPage(): JSX.Element {
   return (
-    <div className="container">Not Found</div>
+    <div className="container" data-testid="not-found">Not Found</div>
   );
 }
 

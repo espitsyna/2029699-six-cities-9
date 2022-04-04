@@ -1,8 +1,8 @@
-import { Offer } from '../../types/offer';
-import Card from '../card/card';
-import { City, Sorting, CARDS_COUNT } from '../../const';
+import { Offer } from '../../../types/offer';
+import Card from '../../card/card';
+import { City, Sorting, CARDS_COUNT } from '../../../const';
 import { useState } from 'react';
-import SortingMenu from './sorting-menu';
+import SortingMenu from './sorting-menu/sorting-menu';
 
 type CardsListProps = {
   selectedCity: City,

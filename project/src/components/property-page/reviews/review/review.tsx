@@ -1,5 +1,5 @@
-import Rating from '../rating/rating';
-import { Review as ReviewType } from '../../types/offer';
+import Rating from '../../../rating/rating';
+import { Review as ReviewType } from '../../../../types/offer';
 
 function Review({ id, rating, date, comment, user: { avatarUrl, name } }: ReviewType): JSX.Element {
   return (

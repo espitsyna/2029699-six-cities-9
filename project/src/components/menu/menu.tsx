@@ -21,6 +21,7 @@ function Menu({ selectedCity }: MenuProps): JSX.Element {
               Object.values(City).map((city) => (
                 <li key={city} className="locations__item">
                   <Link
+                    data-testid={`menu-item-${city}`}
                     to="/"
                     className={`locations__item-link tabs__item ${selectedCity === city ? 'tabs__item--active' : ''}`}
                     onClick={() => dispatch(selectCity({ city }))}
