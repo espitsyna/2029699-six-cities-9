@@ -7,39 +7,35 @@ import Layout from '../layout/layout';
 import PrivateRoute from '../private-route/private-route';
 import { Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import HistoryRouter from '../history-route/history-route';
-import { browserHistory } from '../../browser-history';
 
 function App(): JSX.Element {
   const { authStatus } = useAppSelector(({ user }) => user);
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path='/' element={<Layout authStatus={authStatus} />}>
-          <Route
-            index
-            element={<MainPage />}
-          />
-          <Route
-            path="login"
-            element={<LoginPage authStatus={authStatus} />}
-          />
-          <Route
-            path="favorites"
-            element={<PrivateRoute authStatus={authStatus}><FavoritesPage /></PrivateRoute>}
-          />
-          <Route
-            path="/offer/:id"
-            element={<PropertyPage authStatus={authStatus} />}
-          />
-        </Route>
+    <Routes>
+      <Route path='/' element={<Layout authStatus={authStatus} />}>
         <Route
-          path="*"
-          element={<NotFoundPage />}
+          index
+          element={<MainPage />}
         />
-      </Routes>
-    </HistoryRouter>
+        <Route
+          path="login"
+          element={<LoginPage authStatus={authStatus} />}
+        />
+        <Route
+          path="favorites"
+          element={<PrivateRoute authStatus={authStatus}><FavoritesPage /></PrivateRoute>}
+        />
+        <Route
+          path="/offer/:id"
+          element={<PropertyPage authStatus={authStatus} />}
+        />
+      </Route>
+      <Route
+        path="*"
+        element={<NotFoundPage />}
+      />
+    </Routes>
   );
 }
 
