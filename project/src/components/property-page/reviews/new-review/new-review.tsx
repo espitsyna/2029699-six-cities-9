@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState, Fragment } from 'react';
 import { NewReview as NewReviewType } from '../../../../types/offer';
 import { handleError } from '../../../../services/error';
 
@@ -8,6 +8,7 @@ type NewReviewProps = {
 
 const MIN_LENGTH = 50;
 const MAX_LENGTH = 300;
+const RATING_OPTIONS = [5, 4, 3, 2, 1];
 
 function NewReview({ onReviewSubmit }: NewReviewProps): JSX.Element {
   const [isDisabled, setDisabled] = useState(true);
@@ -33,8 +34,8 @@ function NewReview({ onReviewSubmit }: NewReviewProps): JSX.Element {
     <form className="reviews__form form" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {[5, 4, 3, 2, 1].map((option) => (
-          <div
+        {RATING_OPTIONS.map((option) => (
+          <Fragment
             key={option}
           >
             <input
@@ -51,7 +52,7 @@ function NewReview({ onReviewSubmit }: NewReviewProps): JSX.Element {
                 <use xlinkHref="#icon-star"></use>
               </svg>
             </label>
-          </div>
+          </Fragment>
         ))}
       </div>
       <textarea
